@@ -1,16 +1,11 @@
-//
-//  ViewController.swift
-//  Xylophone
-//
-//  Created by Angela Yu on 27/01/2016.
-//  Copyright © 2016 London App Brewery. All rights reserved.
-//
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, AVAudioPlayerDelegate{
     
-
+    var audioPlayer: AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,6 +14,17 @@ class ViewController: UIViewController{
 
     @IBAction func notePressed(_ sender: UIButton) {
         
+        let soundURL = Bundle.main.path(forResource: "note1", ofType:"wav")!
+        let url = URL(fileURLWithPath: soundURL)
+
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+        }catch{
+            print(error)
+        }
+        
+        audioPlayer.play()
         
         
     }
